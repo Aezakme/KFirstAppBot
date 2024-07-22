@@ -74,8 +74,8 @@
             <a href="https://ton.org/"><img width="48" src="./assets/tapps.png" alt="logo of telegram web apps"></a>
         </div>
         <h1>Modals</h1>
-        
-        
+
+
 
         <h1>Buttons</h1>
         <button onclick="Telegram.WebApp.expand();">Expand Webview</button>
@@ -169,20 +169,18 @@
         function showUserInfo() {
             const initData = Telegram.WebApp.initData;
             const initDataUnsafe = Telegram.WebApp.initDataUnsafe;
-            
-            if (initDataUnsafe.user) {
-                // Create a container for user information
-                const userInfoContainer = document.getElementById('user-info');
-                userInfoContainer.innerHTML = "<h2>User Information:</h2>";
 
-                // Iterate over each property in the user object
-                for (const [key, value] of Object.entries(initDataUnsafe.user)) {
-                    // Create a paragraph element for each property
-                    const p = document.createElement('p');
-                    p.textContent = `${key}: ${value}`;
-                    userInfoContainer.appendChild(p);
-                }
-            } 
+            if (initData && initDataUnsafe) {
+                const initDataJSON = JSON.stringify(initData, null, 2);
+                const initDataUnsafeJSON = JSON.stringify(initDataUnsafe, null, 2);
+
+                // Display the JSON string in a pre-formatted text block
+                document.getElementById('user-info').innerHTML = `
+                <pre>initDataJSON: ${initDataJSON}</pre>
+                
+                <pre>initDataUnsafeJSON: ${initDataUnsafeJSON}</pre>
+                `;
+            }
         };
 
     </script>
