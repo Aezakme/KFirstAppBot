@@ -80,6 +80,7 @@
         <h1>Buttons</h1>
         <button onclick="Telegram.WebApp.expand();">Expand Webview</button>
         <button onclick="toggleMainButton();">Toggle Main Button</button>
+        <button onclick="showUserInfo();">Show user info</button>
         <div id="user-info"></div>
     </main>
     <div id="viewport"></div>
@@ -113,26 +114,13 @@
             const username = initDataUnsafe.user?.username;
             const firstName = initDataUnsafe.user?.first_name;
             const lastName = initDataUnsafe.user?.last_name;
-            const languageCode = initDataUnsafe.user?.language_code;
-            const photoUrl = initDataUnsafe.user?.photo_url;
-            const chatId = initDataUnsafe.chat?.id;
-            const chatType = initDataUnsafe.chat?.type;
-            const chatTitle = initDataUnsafe.chat?.title;
-            const platform = Telegram.WebApp.platform;
-            const theme = Telegram.WebApp.colorScheme;
+
 
             const messageText = `
                 <p>User ID: ${userId}</p>
                 <p>Username: ${username}</p>
                 <p>First Name: ${firstName}</p>
                 <p>Last Name: ${lastName}</p>
-                <p>Language: ${languageCode}</p>
-                <p>Photo URL: <img src="${photoUrl}" alt="Profile Picture" width="50"></p>
-                <p>Chat ID: ${chatId}</p>
-                <p>Chat Type: ${chatType}</p>
-                <p>Chat Title: ${chatTitle}</p>
-                <p>Platform: ${platform}</p>
-                <p>Theme: ${theme}</p>
             `;
 
             Telegram.WebApp.showPopup({
@@ -176,7 +164,7 @@
             document.body.setAttribute('style', '--bg-color:' + Telegram.WebApp.backgroundColor);
         });
 
-        Telegram.WebApp.onEvent('DOMContentLoaded', function () {
+        function showUserInfo() {
             const initData = Telegram.WebApp.initData;
             const initDataUnsafe = Telegram.WebApp.initDataUnsafe;
 
@@ -205,7 +193,8 @@
                 <p>Platform: ${platform}</p>
                 <p>Theme: ${theme}</p>
             `;
-        });
+        };
+        
     </script>
 
     <!-- Eruda is console for mobile browsers -->
