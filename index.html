@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Mini App</title>
+</head>
+<body>
+    <h1>Welcome to Telegram Mini App</h1>
+    <div id="user-info"></div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        Telegram.WebApp.onEvent('DOMContentLoaded', function() {
+            const initData = Telegram.WebApp.initData;
+            const initDataUnsafe = Telegram.WebApp.initDataUnsafe;
+
+            const userId = initDataUnsafe.user?.id;
+            const username = initDataUnsafe.user?.username;
+            const firstName = initDataUnsafe.user?.first_name;
+            const lastName = initDataUnsafe.user?.last_name;
+            const languageCode = initDataUnsafe.user?.language_code;
+            const photoUrl = initDataUnsafe.user?.photo_url;
+            const chatId = initDataUnsafe.chat?.id;
+            const chatType = initDataUnsafe.chat?.type;
+            const chatTitle = initDataUnsafe.chat?.title;
+            const platform = Telegram.WebApp.platform;
+            const theme = Telegram.WebApp.colorScheme;
+
+            document.getElementById('user-info').innerHTML = `
+                <p>User ID: ${userId}</p>
+                <p>Username: ${username}</p>
+                <p>First Name: ${firstName}</p>
+                <p>Last Name: ${lastName}</p>
+                <p>Language: ${languageCode}</p>
+                <p>Photo URL: <img src="${photoUrl}" alt="Profile Picture" width="50"></p>
+                <p>Chat ID: ${chatId}</p>
+                <p>Chat Type: ${chatType}</p>
+                <p>Chat Title: ${chatTitle}</p>
+                <p>Platform: ${platform}</p>
+                <p>Theme: ${theme}</p>
+            `;
+        });
+    </script>
+</body>
+</html>
