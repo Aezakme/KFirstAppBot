@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Telegram Mini Apps Vanilla JS Sample App</title>
     <style>
@@ -19,6 +21,7 @@
         a {
             color: var(--tg-theme-link-color);
         }
+
         #viewport {
             position: fixed;
             left: 0;
@@ -28,6 +31,7 @@
             pointer-events: none;
             transition: all .2s ease;
         }
+
         #viewport:after {
             content: '';
             display: block;
@@ -53,9 +57,11 @@
             padding: 4px;
             vertical-align: top;
         }
+
         #viewport-params-size {
             top: 4px;
         }
+
         #viewport-params-expand {
             top: 30px;
         }
@@ -85,7 +91,7 @@
         Telegram.WebApp.ready();
 
         // Event occurs whenever theme settings are changed in the user's Telegram app (including switching to night mode).
-        Telegram.WebApp.onEvent('themeChanged', function() {
+        Telegram.WebApp.onEvent('themeChanged', function () {
             document.documentElement.className = Telegram.WebApp.colorScheme;
         });
 
@@ -95,23 +101,27 @@
         });
         Telegram.WebApp.MainButton.onClick(function () {
             Telegram.WebApp.showAlert('Main Button was clicked')
-        });	
+        });
         Telegram.WebApp.MainButton.show();
 
         // Function to call showPopup API
         function showPopup() {
-            Telegram.WebApp.showPopup({
-                title: 'Title',
-                message: 'Some message',
-                buttons: [
-                    {id: 'link', type: 'default', text: 'Open ton.org'},
-                    {type: 'cancel'},
-                ]
-            }, function(btn) {
-                if (btn === 'link') {
-                    Telegram.WebApp.openLink('https://ton.org/');
-                }
-            });
+            const initData = Telegram.WebApp.initData;
+            const initDataUnsafe = Telegram.WebApp.initDataUnsafe;
+
+            const userId =
+                Telegram.WebApp.showPopup({
+                    title: 'Title',
+                    message: 'Id: ' + initDataUnsafe.user?.id,
+                    buttons: [
+                        { id: 'link', type: 'default', text: 'Open ton.org' },
+                        { type: 'cancel' },
+                    ]
+                }, function (btn) {
+                    if (btn === 'link') {
+                        Telegram.WebApp.openLink('https://ton.org/');
+                    }
+                });
         };
 
         // Function to toggle main TWA button
@@ -125,7 +135,7 @@
 
         function setViewportData() {
             var sizeEl = document.getElementById('viewport-params-size');
-            sizeEl.innerText = 'width: ' + window.innerWidth + ' x ' + 
+            sizeEl.innerText = 'width: ' + window.innerWidth + ' x ' +
                 'height: ' + Telegram.WebApp.viewportStableHeight;
 
             var expandEl = document.querySelector('#viewport-params-expand');
@@ -137,11 +147,11 @@
         setViewportData();
         Telegram.WebApp.onEvent('viewportChanged', setViewportData);
 
-        Telegram.WebApp.onEvent('themeChanged', function() {
+        Telegram.WebApp.onEvent('themeChanged', function () {
             document.body.setAttribute('style', '--bg-color:' + Telegram.WebApp.backgroundColor);
         });
 
-        Telegram.WebApp.onEvent('DOMContentLoaded', function() {
+        Telegram.WebApp.onEvent('DOMContentLoaded', function () {
             const initData = Telegram.WebApp.initData;
             const initDataUnsafe = Telegram.WebApp.initDataUnsafe;
 
@@ -177,8 +187,9 @@
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
     <script>eruda.init();</script>
     <script>
-        
+
 
     </script>
 </body>
+
 </html>
